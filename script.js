@@ -9,13 +9,6 @@ function getComputerGuess() {
     else return "scissors";
 }
 
-function getPlayerGuess() {
-    let playerGuess = prompt("Please guess rock, paper, or scissors");
-    //Returns player guess in cleaned up form, all lower case
-    //Will assume that player entered a valid choice, no validation required
-    return playerGuess.trim().toLowerCase();
-}
-
 function playRound(playerGuess, computerGuess) {
     if(playerGuess == computerGuess) {
         return "Draw";
@@ -34,11 +27,43 @@ function playRound(playerGuess, computerGuess) {
     }
 }
 
-function play() {
-    for(let i = 0; i < 5; i++) {
-        const playerGuess = getPlayerGuess();
-        const computerGuess = getComputerGuess();
-        console.log(playRound(playerGuess, computerGuess));
-        
-    }
+function rock() {
+    const computerGuess = getComputerGuess();
+    const winnerText = playRound('rock', computerGuess);
+    winner.textContent = winnerText;
 }
+
+function paper() {
+    const computerGuess = getComputerGuess();
+    const winnerText = playRound('paper', computerGuess);
+    winner.textContent = winnerText;
+}
+
+function scissors() {
+    const computerGuess = getComputerGuess();
+    const winnerText = playRound('scissors', computerGuess);
+    winner.textContent = winnerText;
+}
+
+const container = document.querySelector('#buttons');
+const winner = document.querySelector('#winner');
+
+container.setAttribute('style', 'width: 70vw; height: auto; display: flex; margin: 16px auto; justify-content: center');
+winner.setAttribute('style', 'width: 70vw; height: auto; display: flex; margin: 16px auto; justify-content: center')
+
+const buttonRock = document.createElement('button');
+const buttonPaper = document.createElement('button');
+const buttonScissors = document.createElement('button');
+
+winner.textContent = 'Please choose 1 option';
+buttonRock.textContent = 'Rock';
+buttonPaper.textContent = 'Paper';
+buttonScissors.textContent = 'Scissors';
+
+buttonRock.addEventListener('click', rock);
+buttonPaper.addEventListener('click', paper);
+buttonScissors.addEventListener('click', scissors);
+
+container.appendChild(buttonRock);
+container.appendChild(buttonPaper);
+container.appendChild(buttonScissors);
